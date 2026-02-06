@@ -32,7 +32,7 @@
         <header class="header">
             <div class="logo">
                 <h1>🚂 哈比列车指南</h1>
-                <p>角色图鉴</p>
+                <p>简洁版角色图鉴 - JSON数据驱动</p>
             </div>
 
             <!-- QQ群链接 -->
@@ -42,49 +42,76 @@
             </a>
         </header>
 
-        <!-- 阵营选择 -->
-        <div class="faction-selector">
-            <button class="faction-btn active" data-faction="all">
+        <!-- 分类选择 -->
+        <div class="category-selector">
+            <button class="category-btn active" data-category="roles">
                 <i class="fas fa-users"></i>
-                全部角色
+                角色图鉴
             </button>
-            <button class="faction-btn" data-faction="杀手">
-                <i class="fas fa-skull-crossbones"></i>
-                杀手阵营
-            </button>
-            <button class="faction-btn" data-faction="平民">
-                <i class="fas fa-shield-alt"></i>
-                平民阵营
-            </button>
-            <button class="faction-btn" data-faction="中立">
-                <i class="fas fa-balance-scale"></i>
-                中立阵营
+            <button class="category-btn" data-category="features">
+                <i class="fas fa-star"></i>
+                游戏特性
             </button>
         </div>
 
-        <!-- 统计信息 -->
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-label">杀手</span>
-                <span id="killerCount" class="stat-value">0</span>
+        <!-- 角色部分 -->
+        <div id="rolesSection" class="section active">
+            <!-- 阵营选择 -->
+            <div class="faction-selector">
+                <button class="faction-btn active" data-faction="all">
+                    <i class="fas fa-users"></i>
+                    全部角色
+                </button>
+                <button class="faction-btn" data-faction="杀手">
+                    <i class="fas fa-skull-crossbones"></i>
+                    杀手阵营
+                </button>
+                <button class="faction-btn" data-faction="平民">
+                    <i class="fas fa-shield-alt"></i>
+                    平民阵营
+                </button>
+                <button class="faction-btn" data-faction="中立">
+                    <i class="fas fa-balance-scale"></i>
+                    中立阵营
+                </button>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">平民</span>
-                <span id="innocentCount" class="stat-value">0</span>
+
+            <!-- 统计信息 -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">杀手</span>
+                    <span id="killerCount" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">平民</span>
+                    <span id="innocentCount" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">中立</span>
+                    <span id="neutralCount" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总计</span>
+                    <span id="totalCount" class="stat-value">0</span>
+                </div>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">中立</span>
-                <span id="neutralCount" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">总计</span>
-                <span id="totalCount" class="stat-value">0</span>
+
+            <!-- 角色网格 -->
+            <div id="roleGrid" class="role-grid">
+                <!-- 角色卡片将在这里动态生成 -->
             </div>
         </div>
 
-        <!-- 角色网格 -->
-        <div id="roleGrid" class="role-grid">
-            <!-- 角色卡片将在这里动态生成 -->
+        <!-- 特性部分 -->
+        <div id="featuresSection" class="section">
+            <div class="features-header">
+                <h2><i class="fas fa-star"></i> 游戏特性与机制</h2>
+                <p class="subtitle">了解游戏的基本规则和特殊机制</p>
+            </div>
+
+            <div id="featuresGrid" class="features-grid">
+                <!-- 特性卡片将在这里动态生成 -->
+            </div>
         </div>
 
         <!-- 页脚 -->
@@ -150,6 +177,29 @@
                 <div id="modalTipsSection" class="modal-section">
                     <h3><i class="fas fa-lightbulb"></i> 游戏提示</h3>
                     <p id="modalTips">无提示信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 特性详情模态框 -->
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <button id="closeFeatureModal" class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <h2 id="modalFeatureName">特性名称</h2>
+                <div class="modal-subtitle">
+                    <span class="feature-badge">游戏特性</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i class="fas fa-info-circle"></i> 特性介绍</h3>
+                    <p id="modalFeatureDescription">加载中...</p>
                 </div>
             </div>
         </div>
