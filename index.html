@@ -7,6 +7,10 @@
     <title>哈比列车指南</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -26,157 +30,336 @@
         </div>
     </div>
 
+    <!-- 背景装饰 -->
+    <div class="bg-decoration">
+        <div class="bg-circle-1"></div>
+        <div class="bg-circle-2"></div>
+        <div class="bg-circle-3"></div>
+    </div>
+
     <!-- 主容器 -->
     <div class="container">
         <!-- 头部 -->
         <header class="header">
             <div class="logo">
-                <h1>🚂 哈比列车指南</h1>
-                <p>简洁版角色图鉴</p>
+                <h1><span class="train-icon">🚂</span> 哈比列车指南</h1>
+                <p>简洁版角色图鉴 - 探索每个角色的秘密</p>
             </div>
 
             <!-- QQ群链接 -->
             <a href="https://qm.qq.com/q/uISDJ3grgA" target="_blank" class="qq-link">
                 <i class="fab fa-qq"></i>
-                加入QQ群
+                <span>加入QQ群</span>
+                <div class="link-arrow"></div>
             </a>
         </header>
 
         <!-- 分类选择 -->
         <div class="category-selector">
-            <button class="category-btn active" data-category="roles">
-                <i class="fas fa-users"></i>
-                角色图鉴
-            </button>
-            <button class="category-btn" data-category="features">
-                <i class="fas fa-star"></i>
-                游戏特性
-            </button>
+            <div class="selector-wrapper">
+                <button class="category-btn active" data-category="roles">
+                    <div class="btn-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="btn-text">
+                        <span class="btn-title">角色图鉴</span>
+                        <span class="btn-subtitle">探索所有角色</span>
+                    </div>
+                </button>
+                <button class="category-btn" data-category="features">
+                    <div class="btn-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="btn-text">
+                        <span class="btn-title">游戏特性</span>
+                        <span class="btn-subtitle">了解游戏机制</span>
+                    </div>
+                </button>
+            </div>
         </div>
 
         <!-- 角色部分 -->
         <div id="rolesSection" class="section active">
             <!-- 阵营选择 -->
             <div class="faction-selector">
-                <button class="faction-btn active" data-faction="all">
-                    <i class="fas fa-users"></i>
-                    全部角色
-                </button>
-                <button class="faction-btn" data-faction="杀手">
-                    <i class="fas fa-skull-crossbones"></i>
-                    杀手阵营
-                </button>
-                <button class="faction-btn" data-faction="平民">
-                    <i class="fas fa-shield-alt"></i>
-                    平民阵营
-                </button>
-                <button class="faction-btn" data-faction="中立">
-                    <i class="fas fa-balance-scale"></i>
-                    中立阵营
-                </button>
+                <div class="selector-header">
+                    <i class="fas fa-filter"></i>
+                    <span>筛选阵营</span>
+                </div>
+                <div class="faction-buttons">
+                    <button class="faction-btn active" data-faction="all">
+                        <div class="faction-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span>全部角色</span>
+                    </button>
+                    <button class="faction-btn" data-faction="杀手">
+                        <div class="faction-icon">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <span>杀手阵营</span>
+                    </button>
+                    <button class="faction-btn" data-faction="平民">
+                        <div class="faction-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <span>平民阵营</span>
+                    </button>
+                    <button class="faction-btn" data-faction="中立">
+                        <div class="faction-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <span>中立阵营</span>
+                    </button>
+                </div>
             </div>
 
             <!-- 统计信息 -->
             <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-label">杀手</span>
-                    <span id="killerCount" class="stat-value">0</span>
+                <div class="stats-header">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>角色统计</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-label">平民</span>
-                    <span id="innocentCount" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">中立</span>
-                    <span id="neutralCount" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">总计</span>
-                    <span id="totalCount" class="stat-value">0</span>
+                <div class="stats-grid">
+                    <div class="stat-item killer-stat">
+                        <div class="stat-label">
+                            <div class="stat-icon">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <span>杀手</span>
+                        </div>
+                        <div class="stat-value" id="killerCount">0</div>
+                        <div class="stat-trend"></div>
+                    </div>
+                    <div class="stat-item innocent-stat">
+                        <div class="stat-label">
+                            <div class="stat-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span>平民</span>
+                        </div>
+                        <div class="stat-value" id="innocentCount">0</div>
+                        <div class="stat-trend"></div>
+                    </div>
+                    <div class="stat-item neutral-stat">
+                        <div class="stat-label">
+                            <div class="stat-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <span>中立</span>
+                        </div>
+                        <div class="stat-value" id="neutralCount">0</div>
+                        <div class="stat-trend"></div>
+                    </div>
+                    <div class="stat-item total-stat">
+                        <div class="stat-label">
+                            <div class="stat-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <span>总计</span>
+                        </div>
+                        <div class="stat-value" id="totalCount">0</div>
+                        <div class="stat-trend"></div>
+                    </div>
                 </div>
             </div>
 
             <!-- 角色网格 -->
             <div id="roleGrid" class="role-grid">
                 <!-- 角色卡片将在这里动态生成 -->
+                <div class="loading-placeholder">
+                    <div class="spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p>正在加载角色数据...</p>
+                </div>
             </div>
         </div>
 
         <!-- 特性部分 -->
         <div id="featuresSection" class="section">
             <div class="features-header">
-                <h2><i class="fas fa-star"></i> 游戏特性与机制</h2>
-                <p class="subtitle">了解游戏的基本规则和特殊机制</p>
+                <div class="header-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="header-text">
+                    <h2>游戏特性与机制</h2>
+                    <p class="subtitle">深入了解游戏的核心规则和特殊系统</p>
+                </div>
+                <div class="header-decoration"></div>
             </div>
 
             <div id="featuresGrid" class="features-grid">
                 <!-- 特性卡片将在这里动态生成 -->
+                <div class="loading-placeholder">
+                    <div class="spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p>正在加载特性数据...</p>
+                </div>
             </div>
         </div>
 
         <!-- 页脚 -->
         <footer class="footer">
-            <p>© 2024 哈比列车指南</p>
-            <p class="footer-note">
-                <i class="fas fa-code"></i>
-                只需编辑 data.json 文件即可更新内容
-            </p>
-            <div class="footer-links">
-                <a href="https://qm.qq.com/q/uISDJ3grgA" target="_blank">
-                    <i class="fab fa-qq"></i> QQ群
-                </a>
-                <button id="refreshData" class="link-btn">
-                    <i class="fas fa-sync-alt"></i> 刷新数据
-                </button>
-                <button id="showAnnouncement" class="link-btn">
-                    <i class="fas fa-bullhorn"></i> 显示公告
-                </button>
+            <div class="footer-main">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3><i class="fas fa-train"></i> 哈比列车指南</h3>
+                        <p>简洁版角色图鉴</p>
+                    </div>
+                    <p class="footer-description">
+                        为哈比列车玩家提供的最新角色指南，数据持续更新中...
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>数据信息</h4>
+                    <div class="footer-stats">
+                        <div class="footer-stat-item">
+                            <span class="stat-label">更新日期</span>
+                            <span id="updateDate" class="stat-value">2024-01-01</span>
+                        </div>
+                        <div class="footer-stat-item">
+                            <span class="stat-label">角色总数</span>
+                            <span id="footerTotalCount" class="stat-value">0</span>
+                        </div>
+                        <div class="footer-stat-item">
+                            <span class="stat-label">版本</span>
+                            <span class="stat-value">v1.0.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <div class="footer-links">
+                        <a href="https://qm.qq.com/q/uISDJ3grgA" target="_blank" class="footer-link">
+                            <i class="fab fa-qq"></i> QQ交流群
+                        </a>
+                        <button id="refreshData" class="footer-link link-btn" data-tooltip="从服务器重新加载最新数据">
+                            <i class="fas fa-sync-alt"></i> 刷新数据
+                        </button>
+                        <button id="showAnnouncement" class="footer-link link-btn">
+                            <i class="fas fa-bullhorn"></i> 显示公告
+                        </button>
+                        <button id="scrollToTop" class="footer-link link-btn">
+                            <i class="fas fa-arrow-up"></i> 回到顶部
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-note">
+                    <i class="fas fa-code"></i>
+                    只需编辑 data.json 文件即可更新内容
+                    <span class="version-badge">开发者模式</span>
+                </p>
+                <p class="copyright">© 2024 哈比列车指南 · 保留所有权利</p>
             </div>
         </footer>
     </div>
 
     <!-- 角色详情模态框 -->
     <div id="roleModal" class="modal">
-        <div class="modal-content">
-            <button id="closeModal" class="modal-close">
-                <i class="fas fa-times"></i>
-            </button>
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <button id="closeModal" class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
 
-            <div class="modal-header">
-                <h2 id="modalRoleName">角色名称</h2>
-                <div class="modal-subtitle">
-                    <span id="modalFaction" class="faction-badge">阵营</span>
-                    <span id="modalVision" class="vision-badge">透视</span>
-                </div>
-            </div>
-
-            <div class="modal-body">
-                <div class="modal-section">
-                    <h3><i class="fas fa-info-circle"></i> 角色描述</h3>
-                    <p id="modalDescription">加载中...</p>
-                </div>
-
-                <div class="modal-row">
-                    <div class="modal-column">
-                        <h3><i class="fas fa-trophy"></i> 获胜条件</h3>
-                        <p id="modalWinCondition">加载中...</p>
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <h2 id="modalRoleName">角色名称</h2>
+                        <div class="modal-badges">
+                            <span id="modalFaction" class="faction-badge">阵营</span>
+                            <span id="modalVision" class="vision-badge">透视</span>
+                            <span id="modalDifficulty" class="difficulty-badge">难度</span>
+                        </div>
                     </div>
-                    <div class="modal-column">
-                        <h3><i class="fas fa-cogs"></i> 特殊机制</h3>
-                        <p id="modalMechanism">无特殊机制</p>
+                    <div class="modal-header-bg"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3>角色描述</h3>
+                        </div>
+                        <div class="section-content">
+                            <p id="modalDescription" class="description-text">加载中...</p>
+                        </div>
+                    </div>
+
+                    <div class="modal-row">
+                        <div class="modal-column win-condition">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h3>获胜条件</h3>
+                            </div>
+                            <div class="section-content">
+                                <p id="modalWinCondition" class="highlight-text">加载中...</p>
+                            </div>
+                        </div>
+                        <div class="modal-column special-mechanism">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3>特殊机制</h3>
+                            </div>
+                            <div class="section-content">
+                                <p id="modalMechanism" class="highlight-text">无特殊机制</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="modalItemsSection" class="modal-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-backpack"></i>
+                            </div>
+                            <h3>物品装备</h3>
+                        </div>
+                        <div class="section-content">
+                            <div id="modalItems" class="items-grid">
+                                <!-- 物品将动态生成 -->
+                                <div class="empty-state">
+                                    <i class="fas fa-box-open"></i>
+                                    <p>该角色没有携带物品</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="modalTipsSection" class="modal-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>游戏提示</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="tips-box">
+                                <p id="modalTips">暂无提示信息</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="modalItemsSection" class="modal-section">
-                    <h3><i class="fas fa-backpack"></i> 物品装备</h3>
-                    <div id="modalItems" class="items-list">
-                        <!-- 物品将动态生成 -->
-                    </div>
-                </div>
-
-                <div id="modalTipsSection" class="modal-section">
-                    <h3><i class="fas fa-lightbulb"></i> 游戏提示</h3>
-                    <p id="modalTips">无提示信息</p>
+                <div class="modal-footer">
+                    <button class="modal-action-btn close-action">
+                        <i class="fas fa-times"></i>
+                        关闭
+                    </button>
+                    <button class="modal-action-btn copy-action">
+                        <i class="fas fa-copy"></i>
+                        复制信息
+                    </button>
                 </div>
             </div>
         </div>
@@ -184,26 +367,87 @@
 
     <!-- 特性详情模态框 -->
     <div id="featureModal" class="modal">
-        <div class="modal-content">
-            <button id="closeFeatureModal" class="modal-close">
-                <i class="fas fa-times"></i>
-            </button>
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <button id="closeFeatureModal" class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
 
-            <div class="modal-header">
-                <h2 id="modalFeatureName">特性名称</h2>
-                <div class="modal-subtitle">
-                    <span class="feature-badge">游戏特性</span>
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <h2 id="modalFeatureName">特性名称</h2>
+                        <div class="modal-badges">
+                            <span class="feature-badge">游戏特性</span>
+                        </div>
+                    </div>
+                    <div class="modal-header-bg"></div>
                 </div>
-            </div>
 
-            <div class="modal-body">
-                <div class="modal-section">
-                    <h3><i class="fas fa-info-circle"></i> 特性介绍</h3>
-                    <p id="modalFeatureDescription">加载中...</p>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3>特性介绍</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="feature-description-box">
+                                <p id="modalFeatureDescription">加载中...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>游戏影响</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="impact-grid">
+                                <div class="impact-item">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-balance-scale"></i>
+                                    </div>
+                                    <div class="impact-text">
+                                        <span class="impact-label">平衡性</span>
+                                        <span class="impact-value">中等</span>
+                                    </div>
+                                </div>
+                                <div class="impact-item">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="impact-text">
+                                        <span class="impact-label">战略深度</span>
+                                        <span class="impact-value">高</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="modal-action-btn close-action">
+                        <i class="fas fa-times"></i>
+                        关闭
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 工具提示 -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
