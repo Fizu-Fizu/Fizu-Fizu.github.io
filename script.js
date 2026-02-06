@@ -37,6 +37,23 @@ async function loadData() {
 
 // 设置事件监听器
 function setupEventListeners() {
+    // 检测是否为移动设备
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        document.body.classList.add('is-mobile');
+
+        // 防止双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+
     // 关闭公告
     document.getElementById('closeAnnouncement').addEventListener('click', function () {
         document.getElementById('announcement').classList.add('hidden');
@@ -75,8 +92,14 @@ function setupEventListeners() {
                 renderFeaturesGrid();
             }
 
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // 在移动设备上滚动到顶部
+            if (isMobile) {
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         });
     });
 
@@ -348,7 +371,7 @@ function renderFeaturesGrid() {
             <div class="spinner">
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
-            <p>正在加载特性数据...</p>
+            <p>正在加载特质数据...</p>
         </div>
     `;
 
@@ -361,8 +384,8 @@ function renderFeaturesGrid() {
             featuresGrid.innerHTML = `
                 <div class="empty-state" style="grid-column: 1 / -1; padding: 4rem 2rem;">
                     <i class="fas fa-star" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--text-secondary);">暂无特性数据</h3>
-                    <p style="color: var(--text-muted);">请在 data.json 中添加特性数据</p>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--text-secondary);">暂无特质数据</h3>
+                    <p style="color: var(--text-muted);">请在 data.json 中添加特质数据</p>
                 </div>
             `;
             return;
