@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网站 | Hello World!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ 恭喜！</h1>
+            <p class="subtitle">你的网站已经成功上线了</p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>🎯 这是什么？</h2>
+                <p>这是一个通过 <strong>GitHub Pages</strong> 部署的极简静态网站示例。它完全由前端技术（HTML & CSS）构建。</p>
+            </section>
+
+            <section class="card">
+                <h2>🛠️ 技术概览</h2>
+                <ul>
+                    <li><strong>HTML</strong>：提供了页面的基本结构和内容。</li>
+                    <li><strong>CSS</strong>：负责样式、布局和美观。</li>
+                </ul>
+                <p>你可以随时编辑 <code>index.html</code> 和 <code>style.css</code> 文件来修改这个网站。</p>
+            </section>
+
+            <section class="card">
+                <h2>🚀 下一步可以做什么？</h2>
+                <ol>
+                    <li>在GitHub上编辑这些文件，更新为你自己的内容。</li>
+                    <li>在本地编辑后，用Git命令推送到这个仓库。</li>
+                    <li>探索更多：尝试添加图片、JavaScript交互，或使用像Vercel这样的平台。</li>
+                </ol>
+                <p>祝你建站愉快！</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>© <span id="currentYear"></span> — 由 ❤️ 与代码构建 | 这是一个测试页面</p>
+            <p class="footer-hint">👆 试着用浏览器“检查”元素看看代码吧！</p>
+        </footer>
+    </div>
+
+    <script>
+        // 自动更新页脚的年份
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
