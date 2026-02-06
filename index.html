@@ -1,54 +1,161 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一个网站 | Hello World!</title>
+    <title>哈比列车指南</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+    <!-- 公告栏 -->
+    <div id="announcement" class="announcement">
+        <div class="announcement-content">
+            <button id="closeAnnouncement" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="announcement-icon">
+                <i class="fas fa-bullhorn"></i>
+            </div>
+            <div class="announcement-text">
+                <h3>重要公告</h3>
+                <p id="announcementText">加载中...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
     <div class="container">
-        <header>
-            <h1>✨ 恭喜！</h1>
-            <p class="subtitle">你的网站已经成功上线了</p>
+        <!-- 头部 -->
+        <header class="header">
+            <div class="logo">
+                <h1>🚂 哈比列车指南</h1>
+                <p>角色图鉴</p>
+            </div>
+
+            <!-- QQ群链接 -->
+            <a href="https://qm.qq.com/q/uISDJ3grgA" target="_blank" class="qq-link">
+                <i class="fab fa-qq"></i>
+                加入QQ群
+            </a>
         </header>
 
-        <main>
-            <section class="card">
-                <h2>🎯 这是什么？</h2>
-                <p>这是一个通过 <strong>GitHub Pages</strong> 部署的极简静态网站示例。它完全由前端技术（HTML & CSS）构建。</p>
-            </section>
+        <!-- 阵营选择 -->
+        <div class="faction-selector">
+            <button class="faction-btn active" data-faction="all">
+                <i class="fas fa-users"></i>
+                全部角色
+            </button>
+            <button class="faction-btn" data-faction="杀手">
+                <i class="fas fa-skull-crossbones"></i>
+                杀手阵营
+            </button>
+            <button class="faction-btn" data-faction="平民">
+                <i class="fas fa-shield-alt"></i>
+                平民阵营
+            </button>
+            <button class="faction-btn" data-faction="中立">
+                <i class="fas fa-balance-scale"></i>
+                中立阵营
+            </button>
+        </div>
 
-            <section class="card">
-                <h2>🛠️ 技术概览</h2>
-                <ul>
-                    <li><strong>HTML</strong>：提供了页面的基本结构和内容。</li>
-                    <li><strong>CSS</strong>：负责样式、布局和美观。</li>
-                </ul>
-                <p>你可以随时编辑 <code>index.html</code> 和 <code>style.css</code> 文件来修改这个网站。</p>
-            </section>
+        <!-- 统计信息 -->
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">杀手</span>
+                <span id="killerCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">平民</span>
+                <span id="innocentCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">中立</span>
+                <span id="neutralCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">总计</span>
+                <span id="totalCount" class="stat-value">0</span>
+            </div>
+        </div>
 
-            <section class="card">
-                <h2>🚀 下一步可以做什么？</h2>
-                <ol>
-                    <li>在GitHub上编辑这些文件，更新为你自己的内容。</li>
-                    <li>在本地编辑后，用Git命令推送到这个仓库。</li>
-                    <li>探索更多：尝试添加图片、JavaScript交互，或使用像Vercel这样的平台。</li>
-                </ol>
-                <p>祝你建站愉快！</p>
-            </section>
-        </main>
+        <!-- 角色网格 -->
+        <div id="roleGrid" class="role-grid">
+            <!-- 角色卡片将在这里动态生成 -->
+        </div>
 
-        <footer>
-            <p>© <span id="currentYear"></span> — 由 ❤️ 与代码构建 | 这是一个测试页面</p>
-            <p class="footer-hint">👆 试着用浏览器“检查”元素看看代码吧！</p>
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2024 哈比列车指南 | 数据来自 data.json</p>
+            <p class="footer-note">
+                <i class="fas fa-code"></i>
+                只需编辑 data.json 文件即可更新内容
+            </p>
+            <div class="footer-links">
+                <a href="https://qm.qq.com/q/uISDJ3grgA" target="_blank">
+                    <i class="fab fa-qq"></i> QQ群
+                </a>
+                <button id="refreshData" class="link-btn">
+                    <i class="fas fa-sync-alt"></i> 刷新数据
+                </button>
+                <button id="showAnnouncement" class="link-btn">
+                    <i class="fas fa-bullhorn"></i> 显示公告
+                </button>
+            </div>
         </footer>
     </div>
 
-    <script>
-        // 自动更新页脚的年份
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+    <!-- 角色详情模态框 -->
+    <div id="roleModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="modal-header">
+                <h2 id="modalRoleName">角色名称</h2>
+                <div class="modal-subtitle">
+                    <span id="modalFaction" class="faction-badge">阵营</span>
+                    <span id="modalVision" class="vision-badge">透视</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i class="fas fa-info-circle"></i> 角色描述</h3>
+                    <p id="modalDescription">加载中...</p>
+                </div>
+
+                <div class="modal-row">
+                    <div class="modal-column">
+                        <h3><i class="fas fa-trophy"></i> 获胜条件</h3>
+                        <p id="modalWinCondition">加载中...</p>
+                    </div>
+                    <div class="modal-column">
+                        <h3><i class="fas fa-cogs"></i> 特殊机制</h3>
+                        <p id="modalMechanism">无特殊机制</p>
+                    </div>
+                </div>
+
+                <div id="modalItemsSection" class="modal-section">
+                    <h3><i class="fas fa-backpack"></i> 物品装备</h3>
+                    <div id="modalItems" class="items-list">
+                        <!-- 物品将动态生成 -->
+                    </div>
+                </div>
+
+                <div id="modalTipsSection" class="modal-section">
+                    <h3><i class="fas fa-lightbulb"></i> 游戏提示</h3>
+                    <p id="modalTips">无提示信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
