@@ -16,7 +16,6 @@ async function loadData() {
         if (!response.ok) throw new Error('无法加载数据文件');
 
         gameData = await response.json();
-        console.log('数据加载成功:', gameData);
         renderPage();
     } catch (error) {
         console.error('加载数据失败:', error);
@@ -27,13 +26,13 @@ async function loadData() {
 // 设置事件监听器
 function setupEventListeners() {
     // 关闭公告
-    document.getElementById('closeAnnouncement')?.addEventListener('click', function () {
+    document.getElementById('closeAnnouncement').addEventListener('click', function () {
         document.getElementById('announcement').classList.add('hidden');
         localStorage.setItem('announcementClosed', 'true');
     });
 
     // 显示公告按钮
-    document.getElementById('showAnnouncement')?.addEventListener('click', function () {
+    document.getElementById('showAnnouncement').addEventListener('click', function () {
         document.getElementById('announcement').classList.remove('hidden');
     });
 
@@ -70,25 +69,25 @@ function setupEventListeners() {
     });
 
     // 刷新数据按钮
-    document.getElementById('refreshData')?.addEventListener('click', loadData);
+    document.getElementById('refreshData').addEventListener('click', loadData);
 
     // 关闭模态框
-    document.getElementById('closeModal')?.addEventListener('click', function () {
+    document.getElementById('closeModal').addEventListener('click', function () {
         document.getElementById('roleModal').classList.remove('show');
     });
 
-    document.getElementById('closeFeatureModal')?.addEventListener('click', function () {
+    document.getElementById('closeFeatureModal').addEventListener('click', function () {
         document.getElementById('featureModal').classList.remove('show');
     });
 
     // 点击模态框外部关闭
-    document.getElementById('roleModal')?.addEventListener('click', function (e) {
+    document.getElementById('roleModal').addEventListener('click', function (e) {
         if (e.target === this) {
             this.classList.remove('show');
         }
     });
 
-    document.getElementById('featureModal')?.addEventListener('click', function (e) {
+    document.getElementById('featureModal').addEventListener('click', function (e) {
         if (e.target === this) {
             this.classList.remove('show');
         }
@@ -107,8 +106,6 @@ function setupEventListeners() {
 function renderPage() {
     if (!gameData) return;
 
-    console.log('渲染页面，数据:', gameData);
-
     // 渲染公告
     const announcementText = document.getElementById('announcementText');
     if (gameData.公告) {
@@ -124,12 +121,8 @@ function renderPage() {
     // 更新统计数据
     updateStats();
 
-    // 渲染初始内容
-    if (currentCategory === 'roles') {
-        renderRoleGrid();
-    } else if (currentCategory === 'features') {
-        renderFeaturesGrid();
-    }
+    // 渲染角色网格
+    renderRoleGrid();
 }
 
 // 更新统计数据
@@ -372,17 +365,10 @@ function showRoleDetail(role) {
             itemDiv.className = 'item';
 
             if (typeof item === 'string') {
-                // 如果物品是字符串格式
                 const parts = item.split('：');
                 itemDiv.innerHTML = `
                     <div class="item-name">${parts[0] || item}</div>
                     <div class="item-desc">${parts[1] || '暂无描述'}</div>
-                `;
-            } else if (typeof item === 'object') {
-                // 如果物品是对象格式
-                itemDiv.innerHTML = `
-                    <div class="item-name">${item.名称 || item.name || '未命名物品'}</div>
-                    <div class="item-desc">${item.描述 || item.description || '暂无描述'}</div>
                 `;
             }
 
@@ -430,8 +416,5 @@ function showError(message) {
         </div>
     `;
 
-    document.getElementById('retryLoad')?.addEventListener('click', loadData);
+    document.getElementById('retryLoad').addEventListener('click', loadData);
 }
-
-// 暴露函数到全局
-window.loadData = loadData;
